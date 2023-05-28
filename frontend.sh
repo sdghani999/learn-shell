@@ -12,3 +12,4 @@ echo "\e[32mstart the server \e[0m"
 systemctl enable nginx
 systemctl restart nginx
 
+

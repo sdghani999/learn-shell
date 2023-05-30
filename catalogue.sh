@@ -24,7 +24,7 @@ echo -e "\e[33m download the dependencies \e[0m"
 npm install &>>/tmp/roboshop.log
 
 echo -e "\e[33mconfigure catalogue srevice \e[0m"
-cd /catalogue.service/etc/systemd/system/catalogue.service &>>/tmp/roboshop.log
+cd catalogue.service/etc/systemd/system/catalogue.service &>>/tmp/roboshop.log
 
 
 echo -e "\e[33mstart catalogue service \e[0m"

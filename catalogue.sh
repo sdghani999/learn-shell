@@ -29,8 +29,8 @@ cd /catalogue.service/etc/systemd/system/catalogue.service &>>/tmp/roboshop.log
 
 echo -e "\e[33mstart catalogue service \e[0m"
 systemctl daemon-reload &>>/tmp/roboshop.log
-systemctl enable catalogue
-systemctl start catalogue
+systemctl enable catalogue &>>/tmp/roboshop.log
+systemctl start catalogue &>>/tmp/roboshop.log
 
 echo -e "\e[33minstall mongodb clint \e[0m"
 yum install mongodb-org-shell -y &>>/tmp/roboshop.log

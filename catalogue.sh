@@ -10,7 +10,7 @@ useradd roboshop &>>/tmp/roboshop.log
 
 echo -e "\e[33mconfigure application Directory \e[0m"
 rm -rf/ app &>>/tmp/roboshop.log
-mkdir /app
+mkdir /app &>>/tmp/roboshop.log
 
 echo -e "\e[33mdownlode application content \e[0m"
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>/tmp/roboshop.log

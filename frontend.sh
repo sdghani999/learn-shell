@@ -17,3 +17,4 @@ unzip /tmp/frontend.zip &>>/tmp/roboshop.log
 echo -e "\e[32mstart nginx server \e[0m"
 systemctl enable nginx &>>/tmp/roboshop.log
 systemctl restart nginx &>>/tmp/roboshop.log
+

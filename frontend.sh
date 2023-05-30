@@ -19,3 +19,4 @@ systemctl enable nginx &>>/tmp/roboshop.log
 systemctl restart nginx &>>/tmp/roboshop.log
 
 
+

@@ -39,3 +39,4 @@ echo -e "\e[33m install mongodb clint \e[0m"
 
  echo -e "\e[33m lode schema \e[0m"
  mongo --host mongodb-dev.devopsb73.online </app/schema/user.js &>>/tmp/roboshop.log
+

@@ -16,11 +16,11 @@ echo -e "\e[33mdownlode application content \e[0m"
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>/tmp/roboshop.log
 cd /app
 
-echo -e "\e[33mextraction content \e[0m"
+echo -e "\e[33mextract application content \e[0m"
 unzip /tmp/catalogue.zip &>>/tmp/roboshop.log
 cd /app
 
-echo -e "\e[33m download the dependencies \e[0m"
+echo -e "\e[33m install nodejs  dependencies \e[0m"
 npm install &>>/tmp/roboshop.log
 
 echo -e "\e[33mconfigure catalogue srevice \e[0m"
@@ -30,10 +30,11 @@ cd catalogue.service/etc/systemd/system/catalogue.service &>>/tmp/roboshop.log
 echo -e "\e[33mstart catalogue service \e[0m"
 systemctl daemon-reload &>>/tmp/roboshop.log
 systemctl enable catalogue &>>/tmp/roboshop.log
-systemctl start catalogue &>>/tmp/roboshop.log
+systemctl restart catalogue &>>/tmp/roboshop.log
 
 echo -e "\e[33minstall mongodb clint \e[0m"
 yum install mongodb-org-shell -y &>>/tmp/roboshop.log
 
 echo -e "\e[33m Load Schema \e[0m"
 mongo --host mongodb-dev.devopsb73.online </app/schema/catalogue.js &>>/tmp/roboshop.log
+

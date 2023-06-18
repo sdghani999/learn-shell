@@ -44,3 +44,4 @@ echo -e "${colour} install mongodb clint ${nocolour}"
  echo -e "${colour} lode schema ${nocolour}"
  mongo --host mongodb-dev.devopsb73.online </app/schema/${component}.js &>>${log_path}
 
+

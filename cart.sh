@@ -1,30 +1,30 @@
-echo -e "\e[33m setup nodejs repos \e[0m"
+echo -e "${colour} setup nodejs repos ${nocolour}"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/tmp/roboshop.log
 
-echo -e "\e[33m install nodejs \e[0m"
+echo -e "${colour} install nodejs ${nocolour}"
 yum install nodejs -y &>>/tmp/roboshop.log
 
-echo -e "\e[33m add application user \e[0m"
+echo -e "${colour} add application user ${nocolour}"
 useradd roboshop &>>/tmp/roboshop.log
 
-echo -e "\e[33m setup application directory \e[0m"
+echo -e "${colour} setup application directory ${nocolour}"
 mkdir /app &>>/tmp/roboshop.log
 
-echo -e "\e[33m created application directory. \e[0m"
+echo -e "${colour} created application directory. ${nocolour}"
 curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart.zip &>>/tmp/roboshop.log
 cd /app &>>/tmp/roboshop.log
 
-echo -e "\e[33m extract content \e[0m"
+echo -e "${colour} extract content ${nocolour}"
 unzip /tmp/cart.zip &>>/tmp/roboshop.log
 
-echo -e "\e[33m download the dependencies. \e[0m"
+echo -e "${colour} download the dependencies. ${nocolour}"
 cd /app &>>/tmp/roboshop.log
 npm install &>>/tmp/roboshop.log
 
-echo -e "\e[33m Setup SystemD Cart Service \e[0m"
+echo -e "${colour} Setup SystemD Cart Service ${nocolour}"
 cp /etc/systemd/system/cart.service &>>/tmp/roboshop.log
 
-echo -e "\e[33m start cart service \e[0m"
+echo -e "${colour} start cart service ${nocolour}"
 systemctl daemon-reload &>>/tmp/roboshop.log
 systemctl enable cart &>>/tmp/roboshop.log
 systemctl restart cart &>>/tmp/roboshop.log

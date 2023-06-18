@@ -1,41 +1,42 @@
+source common.sh
 
-echo -e "\e[33mconfigure nodejs repo \e[0m"
+echo -e "${colour}configure nodejs repo ${nocolour}"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/tmp/roboshop.log
 
-echo -e "\e[33minstall nodejs \e[0m"
+echo -e "${colour}install nodejs ${nocolour}"
 yum install nodejs -y &>>/tmp/roboshop.log
 
-echo -e "\e[33madd application user \e[0m"
+echo -e "${colour}add application user ${nocolour}"
 useradd roboshop &>>/tmp/roboshop.log
 
-echo -e "\e[33mconfigure application Directory \e[0m"
+echo -e "${colour}configure application Directory ${nocolour}"
 rm -rf/ app &>>/tmp/roboshop.log
 mkdir /app &>>/tmp/roboshop.log
 
-echo -e "\e[33mdownlode application content \e[0m"
+echo -e "${colour}downlode application content ${nocolour}"
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>/tmp/roboshop.log
 cd /app
 
-echo -e "\e[33mextract application content \e[0m"
+echo -e "${colour}extract application content ${nocolour}"
 unzip /tmp/catalogue.zip &>>/tmp/roboshop.log
 cd /app
 
-echo -e "\e[33m install nodejs  dependencies \e[0m"
+echo -e "${colour} install nodejs  dependencies ${nocolour}"
 npm install &>>/tmp/roboshop.log
 
-echo -e "\e[33mconfigure catalogue srevice \e[0m"
+echo -e "${colour}configure catalogue srevice ${nocolour}"
 cd catalogue.service/etc/systemd/system/catalogue.service &>>/tmp/roboshop.log
 
 
-echo -e "\e[33mstart catalogue service \e[0m"
+echo -e "${colour}start catalogue service ${nocolour}"
 systemctl daemon-reload &>>/tmp/roboshop.log
 systemctl enable catalogue &>>/tmp/roboshop.log
 systemctl restart catalogue &>>/tmp/roboshop.log
 
-echo -e "\e[33minstall mongodb clint \e[0m"
+echo -e "${colour}install mongodb clint ${nocolour}"
 yum install mongodb-org-shell -y &>>/tmp/roboshop.log
 
-echo -e "\e[33m Load Schema \e[0m"
+echo -e "${colour} Load Schema ${nocolour}"
 mongo --host mongodb-dev.devopsb73.online </app/schema/catalogue.js &>>/tmp/roboshop.log
 
 

@@ -1,35 +1,37 @@
-echo -e "\e[33m install maven \e[0m"
+source common.sh
+
+echo -e "${colour} install maven ${nocolour}"
 yum install maven -y &>>/tmp/roboshop.log
 
-echo -e "\e[33m add application user \e[0m"
+echo -e "${colour} add application user ${nocolour}"
 useradd roboshop &>>/tmp/roboshop.log
 
-echo -e "\e[33m creat application directory \e[0m"
+echo -e "${colour} creat application directory ${nocolour}"
 rm -rf/app
 mkdir /app &>>/tmp/roboshop.log
 
-echo -e "\e[33m creat application directory \e[0m"
+echo -e "${colour} creat application directory ${nocolour}"
 curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping.zip &>>/tmp/roboshop.log
 
 
-echo -e "\e[33m extract the content \e[0m"
+echo -e "${colour} extract the content ${nocolour}"
 cd/app
 unzip /tmp/shipping.zip &>>/tmp/roboshop.log
 
-echo -e "\e[33m  download the dependencies \e[0m"
+echo -e "${colour}  download the dependencies ${nocolour}"
 mvn clean package &>>/tmp/roboshop.log
 mv target/shipping-1.0.jar shipping.jar &>>/tmp/roboshop.log
 
-echo -e "\e[33m setup systemd service \e[0m"
+echo -e "${colour} setup systemd service ${nocolour}"
 cp /etc/systemd/system/shipping.service &>>/tmp/roboshop.log
 
-echo -e "\e[33m install mysql\e[0m"
+echo -e "${colour} install mysql${nocolour}"
 yum install mysql -y &>>/tmp/roboshop.log
 
-echo -e "\e[33m load schema \e[0m"
+echo -e "${colour} load schema ${nocolour}"
 mysql -h <MYSQL-dev.devopsb73.online> -uroot -pRoboShop@1 < /app/schema/shipping.sql &>>/tmp/roboshop.log
 
-echo -e "\e[33m start shipping service  \e[0m"
+echo -e "${colour} start shipping service  ${nocolour}"
 systemctl daemon-reload &>>/tmp/roboshop.log
 systemctl enable shipping &>>/tmp/roboshop.log
 systemctl restart shipping &>>/tmp/roboshop.log

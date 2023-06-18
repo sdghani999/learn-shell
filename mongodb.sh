@@ -1,9 +1,11 @@
-echo -e "\e[33mcopy mongoDB repo \e[0m"
+source common.sh
+
+echo -e "${colour}copy mongoDB repo ${nocolour}"
 cd /etc/yum.repos.d/mongo.repo &>>/tmp/roboshop.log
 
-echo -e "\e[33minstall mongoDB server \e[0m"
+echo -e "${colour}install mongoDB server ${nocolour}"
 yum install mongodb-org -y &>>/tmp/roboshop.log
 
-echo -e "\e[33mstart mongoDB server \e[0m"
+echo -e "${colour}start mongoDB server ${nocolour}"
 systemctl enable mongod &>>/tmp/roboshop.log
 systemctl restart mongod &>>/tmp/roboshop.log

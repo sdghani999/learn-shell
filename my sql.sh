@@ -17,3 +17,4 @@ systemctl restart ${component}d &>>${log_file}
 echo -e "${colour} setup ${component} password ${nocolour}"
 ${component}_secure_installation --set-root-pass RoboShop@1 &>>${log_file}
 
+

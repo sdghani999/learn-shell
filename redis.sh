@@ -14,3 +14,4 @@ sed -i 's/127.0.0.1/0.0.0.0' /etc/${component}.conf  /etc/${component}/${compone
 echo -e "${colour} start ${component} server ${nocolour}"
 systemctl enable ${component} &>>${log_path}
 systemctl restart ${component} &>>${log_path}
+

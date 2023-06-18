@@ -1,42 +1,46 @@
+source common.sh
+component=${component}
+
+
  echo -e "${colour} Setup NodeJS repos ${nocolour}"
- curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/tmp/roboshop.log
+ curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${log_path}
 
 echo -e "${colour} install nodejs ${nocolour}"
- yum install nodejs -y &>>/tmp/roboshop.log
+ yum install nodejs -y &>>${log_path}
 
-echo -e "${colour} add application user ${nocolour}"
- useradd roboshop &>>/tmp/roboshop.log
+echo -e "${colour} add application ${component} ${nocolour}"
+ ${component}add roboshop &>>${log_path}
 
 echo -e "${colour} creat application directory ${nocolour}"
-rm -rf/app &>>/tmp/roboshop.log
- mkdir /app &>>/tmp/roboshop.log
+rm -rf/app &>>${log_path}
+ mkdir /app &>>${log_path}
 
 echo -e "${colour} downlode application directory ${nocolour}"
- curl -L -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user.zip &>>/tmp/roboshop.log
- cd /app &>>/tmp/roboshop.log
+ curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${log_path}
+ cd /app &>>${log_path}
 
  cho -e "${colour} extract application content ${nocolour}"
- unzip /tmp/user.zip &>>/tmp/roboshop.log &>>/tmp/roboshop.log
+ unzip /tmp/${component}.zip &>>${log_path} &>>${log_path}
 
 echo -e "${colour}downlode dependencies ${nocolour}"
- cd /app &>>/tmp/roboshop.log
- npm install &>>/tmp/roboshop.log
+ cd /app &>>${log_path}
+ npm install &>>${log_path}
 
- echo -e "${colour} setup systemD user srevices ${nocolour}"
-cp /etc/systemd/system/user.service &>>/tmp/roboshop.log
+ echo -e "${colour} setup systemD ${component} srevices ${nocolour}"
+cp /etc/systemd/system/${component}.service &>>${log_path}
 
 echo -e "${colour} copy mongodb repos ${nocolour}"
-cp /etc/yum.repos.d/mongo.repo &>>/tmp/roboshop.log
+cp /etc/yum.repos.d/mongo.repo &>>${log_path}
 
-echo -e "${colour} start user service ${nocolour}"
- systemctl daemon-reload &>>/tmp/roboshop.log
- systemctl enable user &>>/tmp/roboshop.log
- systemctl restart user &>>/tmp/roboshop.log
+echo -e "${colour} start ${component} service ${nocolour}"
+ systemctl daemon-reload &>>${log_path}
+ systemctl enable ${component} &>>${log_path}
+ systemctl restart ${component} &>>${log_path}
 
 
 echo -e "${colour} install mongodb clint ${nocolour}"
- yum install mongodb-org-shell -y &>>/tmp/roboshop.log
+ yum install mongodb-org-shell -y &>>${log_path}
 
  echo -e "${colour} lode schema ${nocolour}"
- mongo --host mongodb-dev.devopsb73.online </app/schema/user.js &>>/tmp/roboshop.log
+ mongo --host mongodb-dev.devopsb73.online </app/schema/${component}.js &>>${log_path}
 

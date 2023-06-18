@@ -1,18 +1,19 @@
 source common.sh
+component=mysql
 
-echo -e "${colour} disable mysql default version ${nocolour}"
-yum module disable mysql -y &>>/tmp/roboshop.log
+echo -e "${colour} disable ${component} default version ${nocolour}"
+yum module disable ${component} -y &>>${log_file}
 
-echo -e "${colour} install mysql community server ${nocolour}"
-yum install mysql-community-server -y &>>/tmp/roboshop.log
+echo -e "${colour} install ${component} community server ${nocolour}"
+yum install ${component}-community-server -y &>>${log_file}
 
-echo -e "${colour} setup mysql repo file ${nocolour}"
-cp /etc/yum.repos.d/mysql.repo &>>/tmp/roboshop.log
+echo -e "${colour} setup ${component} repo file ${nocolour}"
+cp /etc/yum.repos.d/${component}.repo &>>${log_file}
 
-echo -e "${colour} start mysql service ${nocolour}"
-systemctl enable mysqld &>>/tmp/roboshop.log
-systemctl restart mysqld &>>/tmp/roboshop.log
+echo -e "${colour} start ${component} service ${nocolour}"
+systemctl enable ${component}d &>>${log_file}
+systemctl restart ${component}d &>>${log_file}
 
-echo -e "${colour} setup mysql password ${nocolour}"
-mysql_secure_installation --set-root-pass RoboShop@1 &>>/tmp/roboshop.log
+echo -e "${colour} setup ${component} password ${nocolour}"
+${component}_secure_installation --set-root-pass RoboShop@1 &>>${log_file}
 
